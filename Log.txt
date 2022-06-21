@@ -1,4 +1,12 @@
-Tue Jun 21 15:20:03 2022: Start programu
-Tue Jun 21 15:20:03 2022: Koniec programu
-Tue Jun 21 15:22:28 2022: Start programu
-Tue Jun 21 15:22:28 2022: Koniec programu
+Tue Jun 21 19:55:36 2022: Start programu
+Tue Jun 21 19:55:36 2022: Nie podano plików do porównania, program tworzy je sam.
+Tue Jun 21 19:55:36 2022: Utworzono plik binarny: plik1.bin
+Tue Jun 21 19:55:36 2022: Utworzono plik binarny: plik2.bin
+Tue Jun 21 19:55:36 2022: Koniec programu
+
+Tue Jun 21 21:00:09 2022: Start programu
+Tue Jun 21 21:00:09 2022: Nie podano plików do porównania, program tworzy je sam.
+Tue Jun 21 21:00:10 2022: Utworzono plik binarny: plik1.bin
+Tue Jun 21 21:00:10 2022: Utworzono plik binarny: plik2.bin
+Tue Jun 21 21:00:10 2022: Koniec programu
+
