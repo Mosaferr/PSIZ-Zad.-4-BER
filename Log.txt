@@ -1,0 +1,4 @@
+Tue Jun 21 15:20:03 2022: Start programu
+Tue Jun 21 15:20:03 2022: Koniec programu
+Tue Jun 21 15:22:28 2022: Start programu
+Tue Jun 21 15:22:28 2022: Koniec programu
