@@ -9,22 +9,21 @@ using namespace std;
 struct ObliczeniaBer
 {
 	double tot; //Liczba wszystkich bitów
-	double err; //Błędne bity (różne)
+	double err; //Liczba różnych bitów
 	float ber;  //Wynik obliczeń BER
 	clock_t t1; //czas startu obliczeń
 	clock_t t2; //czas zakończenia obliczeń
 };
-
-ObliczeniaBer ObliczBer(string, string);
-void ZapiszWyniki(ObliczeniaBer wynik);
-
 void ZapiszLog(const string);
 void UtworzPlik(const string, const int, const char);
 uint8_t HammingDistance(uint8_t, uint8_t);
+ObliczeniaBer ObliczBer(string, string);
+void ZapiszWyniki(ObliczeniaBer wynik);
 
 int main(int argc, char* argv[])
 {
-	cout << "Kalkulator Bit Error Rate, v.1.0 \n";
+	cout << " Kalkulator Bit Error Rate, v.1.0 \n";
+	cout << "-----------------------------------\n";
 	ZapiszLog("Start programu");
 
 	string nazwapliku1;
@@ -33,17 +32,65 @@ int main(int argc, char* argv[])
 
 	if (argc != 3)
 	{
-		ZapiszLog("Nie podano plików do porównania, program tworzy je sam.");
-		UtworzPlik("plik1.bin", 100000, 0x55);
-		UtworzPlik("plik2.bin", 100000, 0x45);
-		ZapiszLog("Utworzono dwa pliki binarne");
-		ZapiszLog("Uruchom jeszcze raz z argumentami: ./BRE.exe plik1.bin plik2.bin\n");
+		int opcja = {};
+		bool koniec = false;
+		do
+		{
+			cout << "\n Program stworzy dwa pliki binarne do porownania i obliczenia BER \n"
+				"[1] - dwa identyczne pliki, kazdy po 100 bajtow, zawierajace binarnie zapisana wartosc 0x55 \n"
+				"[2] - dwa rozne pliki po 100B, pierwszy z binarnie zapisana wartoscia 0x55, drugi z 0x50 \n"
+				"[3] - dwa rozne po 400MB, pierwszy z binarnie zapisana wartoscia 0x55, drugi z 0x50 \n";
+			cout << "\n Wybierz opcje do testu: [1], [2], albo [3]: ";
+			cin >> opcja;
+			cout << endl;
+			//ZapiszLog("Nie podano plików do porównania, program tworzy je sam.");
+			switch (opcja)
+			{
+			case 1:
+			{
+				UtworzPlik("plik1.bin", 100, 0x55);
+				UtworzPlik("plik2.bin", 100, 0x55);
+				ZapiszLog("Program stworzyl dwa identyczne pliki, kazdy po 100 bajtow, \n"
+					"zawierajace binarnie zapisana wartosc 0x55");
+				koniec = true;
+			} break;
+			case 2:
+			{
+				UtworzPlik("plik1.bin", 100, 0x55);
+				UtworzPlik("plik2.bin", 100, 0x50);
+				ZapiszLog("Program stworzyl dwa rozne pliki, kazdy po 100B, \n"
+					"pierwszy z binarnie zapisana wartoscia 0x55, drugi z 0x50");
+				koniec = true;
+			} break;
+			case 3:
+			{
+				UtworzPlik("plik1.bin", 4 * 1024 * 1024, 0x55);
+				UtworzPlik("plik2.bin", 4 * 1024 * 1024, 0x50);
+				//UtworzPlik("plik1.bin", 400 * 1024 * 1024, 0x55);
+				//UtworzPlik("plik2.bin", 400 * 1024 * 1024, 0x50);
+				ZapiszLog("Program stworzyl dwa rozne pliki, kazdy po 400MB, \n"
+					"pierwszy z binarnie zapisana wartoscia 0x55, drugi z 0x50");
+				koniec = true;
+			} break;
+			default:
+				cout << "Podano zla wartosc \n";
+				system("pause");
+				system("cls");
+				cin.clear();
+				cin.ignore(numeric_limits<streamsize>::max(), '\n');
+			}
+		} while (!koniec);
+
+		cout << "\n Uruchom program jeszcze raz z argumentami: ./BRE2test.exe plik1.bin plik2.bin\n\n";
+		system("pause");
+		ZapiszLog("Zamknięcie programu\n");
+		system("cls");
 	}
 	else
 	{
 		nazwapliku1 = argv[1];
 		nazwapliku2 = argv[2];
-		ZapiszLog("Pobranie dwóch plików do obliczeń");
+		ZapiszLog("Pobranie dwoch plikow do obliczen");
 		wynik = ObliczBer(nazwapliku1, nazwapliku2);
 		ZapiszWyniki(wynik);
 		ZapiszLog("Koniec programu\n");
@@ -53,22 +100,24 @@ int main(int argc, char* argv[])
 
 void ZapiszLog(const string wiadomosc)
 {
+	time_t teraz = time(NULL);
+	string dt = ctime(&teraz);
+	cout << dt.substr(0, dt.length() - 1) << ": " << wiadomosc << endl;
 	fstream plikLog;
-	plikLog.open("Log.log", ios::app);
+	plikLog.open("Log.txt", ios::app);
 	if (plikLog.good())
 	{
-		time_t teraz = time(NULL);
-		string dt = ctime(&teraz);
 		plikLog << dt.substr(0, dt.length() - 1) << ": " << wiadomosc << endl;
 		plikLog.close();
 	}
 	else
 	{
-		cerr << "Błąd otwarcia pliku log\n";
+		cerr << "Blad otwarcia pliku log\n";
 	}
 }
 void UtworzPlik(const string nazwa, const int licznik, const char znak)
 {
+	ZapiszLog("Tworzenie pliku binarnego: " + nazwa);
 	fstream plik;
 	plik.open(nazwa, ios::binary | ios::out);
 	if (plik.good())
@@ -82,8 +131,8 @@ void UtworzPlik(const string nazwa, const int licznik, const char znak)
 	}
 	else
 	{
-		cerr << "Błąd otwarcia testowego \n";
-		ZapiszLog("Błąd otwarcia pliku testowego");
+		//cerr << "Blad otwarcia pliku testowego \n";
+		ZapiszLog("Blad otwarcia pliku testowego");
 	}
 }
 uint8_t HammingDistance(uint8_t n1, uint8_t n2)
@@ -120,22 +169,22 @@ ObliczeniaBer ObliczBer(string nazwapliku1, string nazwapliku2)
 		f2 >> b;
 		if (!f1.eof())
 		{
-			wynik.err += HammingDistance(a, b); //add to the .err the number of different bits
-			wynik.tot += 8; //add to the .tot the number of compared bits
+			wynik.err += HammingDistance(a, b);
+			wynik.tot += 8;
 		}
 	}
-	wynik.ber = (float)wynik.err / wynik.tot; // calculate ber
+	wynik.ber = (float)wynik.err / wynik.tot;
 	wynik.t2 = clock();
-	ZapiszLog("Zakończenie obliczeń");
+	ZapiszLog("Zakonczenie obliczen");
 	return wynik;
 }
 void ZapiszWyniki(ObliczeniaBer wynik)
 {
 	stringstream message;
-	message << "Podanie wyników" << endl;
-	message << "   Wynik obliczeń błędu    - BER: " << wynik.ber << endl;
-	message << "   Liczba wszystkich bitów - Tot: " << wynik.tot << endl;
-	message << "   Błędne bity (różne)     - Err: " << wynik.err << endl;
+	message << "Podanie wynikow" << endl;
+	message << "   Bitowa stopa bledu    - BER: " << wynik.ber << endl;
+	message << "   Liczba wszystkich bitow - Tot: " << wynik.tot << endl;
+	message << "   Liczba wszystkich bitow - Err: " << wynik.err << endl;
 	message << "   Czas obliczeń: " << ((float)wynik.t2 - wynik.t1) / CLOCKS_PER_SEC << " sec ";
 	ZapiszLog(message.str());
 }

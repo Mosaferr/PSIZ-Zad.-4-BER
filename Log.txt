@@ -1,0 +1,18 @@
+Thu Jun 23 22:15:02 2022: Start programu
+Thu Jun 23 22:15:04 2022: Tworzenie pliku binarnego: plik1.bin
+Thu Jun 23 22:15:04 2022: Utworzono plik binarny: plik1.bin
+Thu Jun 23 22:15:04 2022: Tworzenie pliku binarnego: plik2.bin
+Thu Jun 23 22:15:04 2022: Utworzono plik binarny: plik2.bin
+Thu Jun 23 22:15:04 2022: Program stworzyl dwa identyczne pliki, kazdy po 100 bajtow, 
+zawierajace binarnie zapisana wartosc 0x55
+Thu Jun 23 22:15:42 2022: Zamkniêcie programu
+
+Thu Jun 23 22:16:01 2022: Start programu
+Thu Jun 23 22:16:10 2022: Tworzenie pliku binarnego: plik1.bin
+Thu Jun 23 22:16:10 2022: Utworzono plik binarny: plik1.bin
+Thu Jun 23 22:16:10 2022: Tworzenie pliku binarnego: plik2.bin
+Thu Jun 23 22:16:10 2022: Utworzono plik binarny: plik2.bin
+Thu Jun 23 22:16:10 2022: Program stworzyl dwa identyczne pliki, kazdy po 100 bajtow, 
+zawierajace binarnie zapisana wartosc 0x55
+Thu Jun 23 22:16:21 2022: Zamkniêcie programu
+
