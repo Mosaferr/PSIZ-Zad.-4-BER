@@ -1,18 +1,73 @@
-Thu Jun 23 22:15:02 2022: Start programu
-Thu Jun 23 22:15:04 2022: Tworzenie pliku binarnego: plik1.bin
-Thu Jun 23 22:15:04 2022: Utworzono plik binarny: plik1.bin
-Thu Jun 23 22:15:04 2022: Tworzenie pliku binarnego: plik2.bin
-Thu Jun 23 22:15:04 2022: Utworzono plik binarny: plik2.bin
-Thu Jun 23 22:15:04 2022: Program stworzyl dwa identyczne pliki, kazdy po 100 bajtow, 
-zawierajace binarnie zapisana wartosc 0x55
-Thu Jun 23 22:15:42 2022: Zamkniêcie programu
+Thu Jun 23 23:03:11 2022: Start programu
+Thu Jun 23 23:03:11 2022: Pobieranie dwoch plikow testowych
+Thu Jun 23 23:03:11 2022: Blad otwarcia pliku testowego. Zakonczenie programu.
 
-Thu Jun 23 22:16:01 2022: Start programu
-Thu Jun 23 22:16:10 2022: Tworzenie pliku binarnego: plik1.bin
-Thu Jun 23 22:16:10 2022: Utworzono plik binarny: plik1.bin
-Thu Jun 23 22:16:10 2022: Tworzenie pliku binarnego: plik2.bin
-Thu Jun 23 22:16:10 2022: Utworzono plik binarny: plik2.bin
-Thu Jun 23 22:16:10 2022: Program stworzyl dwa identyczne pliki, kazdy po 100 bajtow, 
+Thu Jun 23 23:03:37 2022: Start programu
+Thu Jun 23 23:04:22 2022: Tworzenie pliku binarnego: plik1.bin
+Thu Jun 23 23:04:22 2022: Utworzono plik binarny: plik1.bin
+Thu Jun 23 23:04:22 2022: Tworzenie pliku binarnego: plik2.bin
+Thu Jun 23 23:04:22 2022: Utworzono plik binarny: plik2.bin
+Thu Jun 23 23:04:22 2022: Program stworzyl dwa identyczne pliki, kazdy po 100 bajtow, 
 zawierajace binarnie zapisana wartosc 0x55
-Thu Jun 23 22:16:21 2022: Zamkniêcie programu
+Thu Jun 23 23:46:06 2022: Zamkniêcie programu
+
+Thu Jun 23 23:46:25 2022: Start programu
+Thu Jun 23 23:46:25 2022: Pobieranie dwoch plikow testowych
+Thu Jun 23 23:46:25 2022: Obliczanie BER...
+Thu Jun 23 23:46:25 2022: Zakonczenie obliczen
+Thu Jun 23 23:46:25 2022: Podanie wynikow
+   Bitowa stopa bledu      - BER: 0
+   Liczba wszystkich bitow - Tot: 800
+   Liczba wszystkich bitow - Err: 0
+   Czas obliczen:          0 sekund.
+Thu Jun 23 23:46:25 2022: Koniec programu
+
+Thu Jun 23 23:57:16 2022: Start programu
+Thu Jun 23 23:57:27 2022: Tworzenie pliku binarnego: plik1.bin
+Thu Jun 23 23:57:27 2022: Utworzono plik binarny: plik1.bin
+Thu Jun 23 23:57:27 2022: Tworzenie pliku binarnego: plik2.bin
+Thu Jun 23 23:57:27 2022: Utworzono plik binarny: plik2.bin
+Thu Jun 23 23:57:27 2022: Program stworzyl dwa rozne pliki, kazdy po 100B, 
+pierwszy z binarnie zapisana wartoscia 0x55, drugi z 0x50
+Thu Jun 23 23:57:29 2022: Zamkniêcie programu
+
+Thu Jun 23 23:57:40 2022: Start programu
+Thu Jun 23 23:57:40 2022: Pobieranie dwoch plikow testowych
+Thu Jun 23 23:57:40 2022: Obliczanie BER...
+Thu Jun 23 23:57:40 2022: Zakonczenie obliczen
+Thu Jun 23 23:57:40 2022: Podanie wynikow
+   Bitowa stopa bledu      - BER: 0.25
+   Liczba wszystkich bitow - Tot: 800
+   Liczba wszystkich bitow - Err: 200
+   Czas obliczen:          0 sekund.
+Thu Jun 23 23:57:40 2022: Koniec programu
+
+Thu Jun 23 23:57:43 2022: Start programu
+Thu Jun 23 23:57:47 2022: Tworzenie pliku binarnego: plik1.bin
+Thu Jun 23 23:59:31 2022: Utworzono plik binarny: plik1.bin
+Thu Jun 23 23:59:31 2022: Tworzenie pliku binarnego: plik2.bin
+Fri Jun 24 00:01:14 2022: Utworzono plik binarny: plik2.bin
+Fri Jun 24 00:01:14 2022: Program stworzyl dwa rozne pliki, kazdy po 400MB, 
+pierwszy z binarnie zapisana wartoscia 0x55, drugi z 0x50
+Fri Jun 24 00:01:43 2022: Zamkniêcie programu
+
+Fri Jun 24 00:02:01 2022: Start programu
+Fri Jun 24 00:02:01 2022: Pobieranie dwoch plikow testowych
+Fri Jun 24 00:02:01 2022: Obliczanie BER...
+Fri Jun 24 00:07:29 2022: Zakonczenie obliczen
+Fri Jun 24 00:07:29 2022: Podanie wynikow
+   Bitowa stopa bledu      - BER: 0.25
+   Liczba wszystkich bitow - Tot: 3.35544e+09
+   Liczba wszystkich bitow - Err: 8.38861e+08
+   Czas obliczen:          327.581 sekund.
+Fri Jun 24 00:07:29 2022: Koniec programu
+
+Fri Jun 24 01:50:55 2022: Start programu
+Fri Jun 24 01:51:00 2022: Tworzenie pliku binarnego: plik1.bin
+Fri Jun 24 01:51:00 2022: Utworzono plik binarny: plik1.bin
+Fri Jun 24 01:51:00 2022: Tworzenie pliku binarnego: plik2.bin
+Fri Jun 24 01:51:00 2022: Utworzono plik binarny: plik2.bin
+Fri Jun 24 01:51:00 2022: Program stworzyl dwa rozne pliki, kazdy po 100B, 
+pierwszy z binarnie zapisana wartoscia 0x55, drugi z 0x50
+Fri Jun 24 01:51:01 2022: ZamkniÄ™cie programu
 
