@@ -1,4 +1,4 @@
-﻿// BER
+// BER
 //Grzegorz Kowalczyk, D3
 
 #define _CRT_SECURE_NO_WARNINGS
@@ -22,7 +22,7 @@ void ZapiszWyniki(ObliczeniaBer wynik);
 
 int main(int argc, char* argv[])
 {
-	cout << " Kalkulator Bit Error Rate, v.1.0 \n";
+	cout << "\n Kalkulator Bit Error Rate, v.1.0 \n";
 	cout << "-----------------------------------\n";
 	ZapiszLog("Start programu");
 
@@ -43,7 +43,6 @@ int main(int argc, char* argv[])
 			cout << "\n Wybierz opcje do testu: [1], [2], albo [3]: ";
 			cin >> opcja;
 			cout << endl;
-			//ZapiszLog("Nie podano plików do porównania, program tworzy je sam.");
 			switch (opcja)
 			{
 			case 1:
@@ -64,10 +63,8 @@ int main(int argc, char* argv[])
 			} break;
 			case 3:
 			{
-				UtworzPlik("plik1.bin", 4 * 1024 * 1024, 0x55);
-				UtworzPlik("plik2.bin", 4 * 1024 * 1024, 0x50);
-				//UtworzPlik("plik1.bin", 400 * 1024 * 1024, 0x55);
-				//UtworzPlik("plik2.bin", 400 * 1024 * 1024, 0x50);
+				UtworzPlik("plik1.bin", 400 * 1024 * 1024, 0x55);
+				UtworzPlik("plik2.bin", 400 * 1024 * 1024, 0x50);
 				ZapiszLog("Program stworzyl dwa rozne pliki, kazdy po 400MB, \n"
 					"pierwszy z binarnie zapisana wartoscia 0x55, drugi z 0x50");
 				koniec = true;
@@ -90,7 +87,7 @@ int main(int argc, char* argv[])
 	{
 		nazwapliku1 = argv[1];
 		nazwapliku2 = argv[2];
-		ZapiszLog("Pobranie dwoch plikow do obliczen");
+		ZapiszLog("Pobieranie dwoch plikow testowych");
 		wynik = ObliczBer(nazwapliku1, nazwapliku2);
 		ZapiszWyniki(wynik);
 		ZapiszLog("Koniec programu\n");
@@ -131,7 +128,6 @@ void UtworzPlik(const string nazwa, const int licznik, const char znak)
 	}
 	else
 	{
-		//cerr << "Blad otwarcia pliku testowego \n";
 		ZapiszLog("Blad otwarcia pliku testowego");
 	}
 }
@@ -156,35 +152,45 @@ ObliczeniaBer ObliczBer(string nazwapliku1, string nazwapliku2)
 	wynik.err = 0;
 	wynik.tot = 0;
 
-	ZapiszLog("Obliczanie BER...");
 	f1.open(nazwapliku1, ios::binary | ios::in);
 	f2.open(nazwapliku2, ios::binary | ios::in);
-	char a = 0x00;
-	char b = 0x00;
-	wynik.t1 = clock();
 
-	while (!f1.eof())
+	if ((f1.good()) && (f2.good()))
 	{
-		f1 >> a;
-		f2 >> b;
-		if (!f1.eof())
+		ZapiszLog("Obliczanie BER...");
+		char a = 0x00;
+		char b = 0x00;
+		wynik.t1 = clock();
+
+		while (!f1.eof())
 		{
-			wynik.err += HammingDistance(a, b);
-			wynik.tot += 8;
+			f1 >> a;
+			f2 >> b;
+			if (!f1.eof())
+			{
+				wynik.err += HammingDistance(a, b);
+				wynik.tot += 8;
+			}
 		}
+		wynik.ber = (float)wynik.err / wynik.tot;
+		wynik.t2 = clock();
+		ZapiszLog("Zakonczenie obliczen");
+		f1.close();
+		f2.close();
+		return wynik;
 	}
-	wynik.ber = (float)wynik.err / wynik.tot;
-	wynik.t2 = clock();
-	ZapiszLog("Zakonczenie obliczen");
-	return wynik;
+	else
+	{
+		ZapiszLog("Blad otwarcia pliku testowego. Zakonczenie programu.\n");
+	}
 }
 void ZapiszWyniki(ObliczeniaBer wynik)
 {
 	stringstream message;
 	message << "Podanie wynikow" << endl;
-	message << "   Bitowa stopa bledu    - BER: " << wynik.ber << endl;
+	message << "   Bitowa stopa bledu      - BER: " << wynik.ber << endl;
 	message << "   Liczba wszystkich bitow - Tot: " << wynik.tot << endl;
 	message << "   Liczba wszystkich bitow - Err: " << wynik.err << endl;
-	message << "   Czas obliczeń: " << ((float)wynik.t2 - wynik.t1) / CLOCKS_PER_SEC << " sec ";
+	message << "   Czas obliczen:          " << ((float)wynik.t2 - wynik.t1) / CLOCKS_PER_SEC << " sekund.";
 	ZapiszLog(message.str());
 }
